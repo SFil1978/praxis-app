@@ -51,23 +51,37 @@ export default function PraxisApp() {
   }, [session]);
 
   // ✅ Daten speichern
-  const speichern = async () => {
-    if (!eintrag.datum || !eintrag.betrag) return;
 
-    await supabase.from("buchungen").insert([eintrag]);
-    ladeDaten();
+const speichern = async () => {
+  if (!eintrag.datum || !eintrag.betrag) return;
 
-    setEintrag({
-      datum: "",
-      betrag: "",
-      typ: "Einnahme",
-      kategorie: "",
-      zahlungsart: "",
-      leistung: "",
-      debitor: "",
-      kreditor: ""
-    });
-  };
+  const { error } = await supabase.from("buchungen").insert([
+    {
+      ...eintrag,
+      user_id: session.user.id // ✅ WICHTIG: User-ID wird gesetzt
+    }
+  ]);
+
+  if (error) {
+    console.error(error);
+    alert("Fehler beim Speichern: " + error.message);
+    return;
+  }
+
+  ladeDaten();
+
+  setEintrag({
+    datum: "",
+    betrag: "",
+    typ: "Einnahme",
+    kategorie: "",
+    zahlungsart: "",
+    leistung: "",
+    debitor: "",
+    kreditor: ""
+  });
+};
+
 
   const gesamt = daten.reduce((sum, d) => {
     return d.typ === "Einnahme"
