@@ -220,9 +220,45 @@ if (!session) {
           <option>Ausgabe</option>
         </select>
 
-        <input placeholder="Kategorie" value={eintrag.kategorie} onChange={e => setEintrag({ ...eintrag, kategorie: e.target.value })} style={inputStyleModern} />
-        <input placeholder="Zahlungsart" value={eintrag.zahlungsart} onChange={e => setEintrag({ ...eintrag, zahlungsart: e.target.value })} style={inputStyleModern} />
-        <input placeholder="Leistung" value={eintrag.leistung} onChange={e => setEintrag({ ...eintrag, leistung: e.target.value })} style={inputStyleModern} />
+
+<select
+  value={eintrag.kategorie}
+  onChange={e => setEintrag({ ...eintrag, kategorie: e.target.value })}
+  style={inputStyleModern}
+>
+  <option value="">Kategorie wählen</option>
+  <option>Administration</option>
+  <option>Miete</option>
+  <option>Material</option>
+  <option>Marketing</option>
+  <option>Therapie</option>
+</select>
+        
+
+<select
+  value={eintrag.zahlungsart}
+  onChange={e => setEintrag({ ...eintrag, zahlungsart: e.target.value })}
+  style={inputStyleModern}
+>
+  <option value="">Zahlungsart wählen</option>
+  <option>Bar</option>
+  <option>Twint</option>
+  <option>Rechnung</option>
+</select>
+
+
+<select
+  value={eintrag.leistung}
+  onChange={e => setEintrag({ ...eintrag, leistung: e.target.value })}
+  style={inputStyleModern}
+>
+  <option value="">Leistung wählen</option>
+  <option>Kennenlern-Sitzung</option>
+  <option>Hypnose</option>
+  <option>ChiroTrance Hypnose</option>
+</select>
+
+
         <input placeholder="Debitor" value={eintrag.debitor} onChange={e => setEintrag({ ...eintrag, debitor: e.target.value })} style={inputStyleModern} />
         <input placeholder="Kreditor" value={eintrag.kreditor} onChange={e => setEintrag({ ...eintrag, kreditor: e.target.value })} style={inputStyleModern} />
 
