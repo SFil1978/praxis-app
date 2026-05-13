@@ -192,9 +192,9 @@ const containerStyle = {
 };
 
 const logoLarge = {
-  width: "70%",
-  maxWidth: 200,
-  marginBottom: 20
+  width: "40%",
+  maxWidth: 120,
+  marginBottom: 10
 };
 
 const logoSmall = {
