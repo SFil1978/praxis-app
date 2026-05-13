@@ -109,6 +109,15 @@ export default function PraxisApp() {
       ? sum + parseFloat(d.betrag || 0)
       : sum - parseFloat(d.betrag || 0);
   }, 0);
+const einnahmen = daten
+  .filter(d => d.typ === "Einnahme")
+  .reduce((sum, d) => sum + parseFloat(d.betrag || 0), 0);
+
+const ausgaben = daten
+  .filter(d => d.typ === "Ausgabe")
+  .reduce((sum, d) => sum + parseFloat(d.betrag || 0), 0);
+
+const gewinn = einnahmen - ausgaben;
 
 if (!session) {
   return (
@@ -164,6 +173,22 @@ if (!session) {
       <img src="/logo.png" style={logoSmall} alt="Logo" />
 
       <h1>Einnahmen-Ausgaben</h1>
+<div style={dashboardStyle}>
+  <div style={cardStyle}>
+    <div>Einnahmen</div>
+    <strong>{einnahmen.toFixed(2)} CHF</strong>
+  </div>
+
+  <div style={cardStyle}>
+    <div>Ausgaben</div>
+    <strong>{ausgaben.toFixed(2)} CHF</strong>
+  </div>
+
+  <div style={cardStyle}>
+    <div>Gewinn</div>
+    <strong>{gewinn.toFixed(2)} CHF</strong>
+  </div>
+</div>
 
       <button style={buttonStyle} onClick={() => supabase.auth.signOut()}>Logout</button>
 
@@ -271,4 +296,21 @@ const boxStyle = {
   marginTop: 20,
   borderRadius: 12,
   background: "#fafafa"
+};
+const dashboardStyle = {
+  display: "flex",
+  gap: 10,
+  justifyContent: "space-between",
+  marginTop: 10,
+  flexWrap: "wrap"
+};
+
+const cardStyle = {
+  flex: 1,
+  minWidth: "30%",
+  padding: 12,
+  borderRadius: 10,
+  background: "#f1f5f9",
+  textAlign: "center",
+  fontSize: 14
 };
