@@ -122,8 +122,21 @@ const gewinn = einnahmen - ausgaben;
 if (!session) {
   return (
     <div style={containerStyle}>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <img src="/logo.png" style={logoLarge} alt="Logo" />
+
+      {/* 🔥 LOGO MIT APP LOOK */}
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        marginBottom: 20
+      }}>
+        <div style={{
+          padding: 10,
+          borderRadius: 16,
+          background: "#f1f5f9",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
+        }}>
+          <img src="/logo.png" style={logoLarge} alt="Logo" />
+        </div>
       </div>
 
       <h2>{mode === "login" ? "Einloggen" : "Konto erstellen"}</h2>
@@ -164,9 +177,11 @@ if (!session) {
       >
         {mode === "login" ? "Registrieren" : "Zum Login"}
       </button>
+
     </div>
   );
 }
+
 
   return (
     <div style={containerStyle}>
@@ -243,9 +258,9 @@ const containerStyle = {
 };
 
 const logoLarge = {
-  width: "40%",
-  maxWidth: 120,
-  marginBottom: 10
+  width: "35%",
+  maxWidth: 110,
+  borderRadius: 12,
 };
 
 const logoSmall = {
