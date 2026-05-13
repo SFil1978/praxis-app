@@ -118,9 +118,29 @@ const speichern = async () => {
         {mode === "login" ? (
           <button
             style={buttonStyle}
-            onClick={async () => {
+/*            onClick={async () => {
               await supabase.auth.signInWithPassword({ email, password });
             }}
+*/
+		onClick={async () => {
+		  try {
+		    setErrorMsg("Lade...");
+
+	    const { error } = await supabase.auth.signInWithPassword({
+	      email,
+	      password
+    });
+
+    if (error) {
+      setErrorMsg(error.message);
+    } else {
+      setErrorMsg("");
+    }
+  } catch (err) {
+    setErrorMsg("Netzwerkfehler");
+  }
+}}
+
           >
             🔐 Einloggen
           </button>
