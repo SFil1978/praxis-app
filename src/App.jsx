@@ -172,23 +172,25 @@ if (!session) {
     <div style={containerStyle}>
       <img src="/logo.png" style={logoSmall} alt="Logo" />
 
-      <h1>Einnahmen-Ausgaben</h1>
-<div style={dashboardStyle}>
-  <div style={cardStyle}>
-    <div>Einnahmen</div>
-    <strong>{einnahmen.toFixed(2)} CHF</strong>
-  </div>
+      
+	<h1>Einnahmen-Ausgaben</h1>
 
-  <div style={cardStyle}>
-    <div>Ausgaben</div>
-    <strong>{ausgaben.toFixed(2)} CHF</strong>
-  </div>
+	<div style={dashboardStyle}>
+	  <div style={cardStyle}>
+	    <div>Einnahmen</div>
+	    <strong>{einnahmen.toFixed(2)} CHF</strong>
+	  </div>
 
-  <div style={cardStyle}>
-    <div>Gewinn</div>
-    <strong>{gewinn.toFixed(2)} CHF</strong>
-  </div>
-</div>
+	  <div style={cardStyle}>
+	    <div>Ausgaben</div>
+	    <strong>{ausgaben.toFixed(2)} CHF</strong>
+	  </div>
+
+	  <div style={cardStyle}>
+	    <div>Gewinn</div>
+	    <strong>{gewinn.toFixed(2)} CHF</strong>
+	  </div>
+	</div>
 
       <button style={buttonStyle} onClick={() => supabase.auth.signOut()}>Logout</button>
 
