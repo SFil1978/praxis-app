@@ -110,31 +110,54 @@ export default function PraxisApp() {
       : sum - parseFloat(d.betrag || 0);
   }, 0);
 
-  if (!session) {
-    return (
-		<div style={{ display: "flex", justifyContent: "center" }}>
-		  <img src="/logo.png" style={logoLarge} alt="Logo" />
-		</div>
-
-        <h2>{mode === "login" ? "Einloggen" : "Konto erstellen"}</h2>
-
-        <input placeholder="E-Mail" value={email} onChange={(e) => setEmail(e.target.value)} style={inputStyle} />
-        <input type="password" placeholder="Passwort" value={password} onChange={(e) => setPassword(e.target.value)} style={inputStyle} />
-
-        {errorMsg && <div style={errorStyle}>{errorMsg}</div>}
-
-        {mode === "login" ? (
-          <button style={buttonStyle} onClick={handleLogin}>🔐 Einloggen</button>
-        ) : (
-          <button style={{ ...buttonStyle, background: "green" }} onClick={handleSignup}>🆕 Konto erstellen</button>
-        )}
-
-        <button style={{ ...buttonStyle, background: "gray" }} onClick={() => setMode(mode === "login" ? "signup" : "login")}>
-          {mode === "login" ? "Registrieren" : "Zum Login"}
-        </button>
+if (!session) {
+  return (
+    <div style={containerStyle}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <img src="/logo.png" style={logoLarge} alt="Logo" />
       </div>
-    );
-  }
+
+      <h2>{mode === "login" ? "Einloggen" : "Konto erstellen"}</h2>
+
+      <input
+        placeholder="E-Mail"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={inputStyle}
+      />
+
+      <input
+        type="password"
+        placeholder="Passwort"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        style={inputStyle}
+      />
+
+      {errorMsg && <div style={errorStyle}>{errorMsg}</div>}
+
+      {mode === "login" ? (
+        <button style={buttonStyle} onClick={handleLogin}>
+          🔐 Einloggen
+        </button>
+      ) : (
+        <button
+          style={{ ...buttonStyle, background: "green" }}
+          onClick={handleSignup}
+        >
+          🆕 Konto erstellen
+        </button>
+      )}
+
+      <button
+        style={{ ...buttonStyle, background: "gray" }}
+        onClick={() => setMode(mode === "login" ? "signup" : "login")}
+      >
+        {mode === "login" ? "Registrieren" : "Zum Login"}
+      </button>
+    </div>
+  );
+}
 
   return (
     <div style={containerStyle}>
