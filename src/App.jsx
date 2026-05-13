@@ -183,56 +183,68 @@ export default function PraxisApp() {
 }
 
 const containerStyle = {
-  maxWidth: 420,
+  maxWidth: "100%",
+  width: "100%",
   margin: "auto",
-  padding: 20,
-  textAlign: "center"
+  padding: 15,
+  textAlign: "center",
+  boxSizing: "border-box"
 };
 
 const logoLarge = {
-  width: "60%",
-  maxWidth: 180,
+  width: "70%",
+  maxWidth: 200,
   marginBottom: 20
 };
 
 const logoSmall = {
-  width: "35%",
-  maxWidth: 140,
+  width: "50%",
+  maxWidth: 160,
   marginBottom: 10
 };
 
 const inputStyle = {
   width: "100%",
-  padding: 10,
-  marginBottom: 10
+  padding: 14,
+  marginBottom: 12,
+  fontSize: 16,
+  borderRadius: 8,
+  border: "1px solid #ccc",
+  boxSizing: "border-box"
 };
 
 const inputStyleModern = {
   width: "100%",
-  padding: 12,
-  marginBottom: 10,
-  borderRadius: 8,
-  border: "1px solid #ddd"
+  padding: 14,
+  marginBottom: 12,
+  borderRadius: 10,
+  border: "1px solid #ddd",
+  fontSize: 16,
+  boxSizing: "border-box"
 };
 
 const buttonStyle = {
   width: "100%",
-  padding: 12,
-  marginTop: 8,
-  background: "blue",
+  padding: 14,
+  marginTop: 10,
+  background: "#2563eb",
   color: "white",
   border: "none",
-  borderRadius: 8
+  borderRadius: 10,
+  fontSize: 16,
+  fontWeight: "bold"
 };
 
 const errorStyle = {
   color: "red",
-  marginBottom: 10
+  marginBottom: 12,
+  fontSize: 14
 };
 
 const boxStyle = {
-  border: "1px solid #ccc",
+  border: "1px solid #eee",
   padding: 15,
   marginTop: 20,
-  borderRadius: 10
+  borderRadius: 12,
+  background: "#fafafa"
 };
