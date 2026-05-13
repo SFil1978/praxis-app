@@ -17,7 +17,12 @@ export default function PraxisApp() {
   const [eintrag, setEintrag] = useState({
     datum: "",
     betrag: "",
-    typ: "Einnahme"
+    typ: "Einnahme",
+    kategorie: "",
+    zahlungsart: "",
+    leistung: "",
+    debitor: "",
+    kreditor: ""
   });
 
   const [daten, setDaten] = useState([]);
@@ -25,10 +30,9 @@ export default function PraxisApp() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
 
-    const { data: listener } =
-      supabase.auth.onAuthStateChange((_event, session) => {
-        setSession(session);
-      });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
 
     return () => listener.subscription.unsubscribe();
   }, []);
@@ -49,7 +53,6 @@ export default function PraxisApp() {
     if (session) ladeDaten();
   }, [session]);
 
-  // ✅ LOGIN (Safari fix)
   const handleLogin = async () => {
     setErrorMsg("⏳ Login läuft...");
 
@@ -59,12 +62,9 @@ export default function PraxisApp() {
         password
       });
 
-      if (error) {
-        setErrorMsg("❌ " + error.message);
-      } else {
-        setErrorMsg("");
-      }
-    } catch (e) {
+      if (error) setErrorMsg("❌ " + error.message);
+      else setErrorMsg("");
+    } catch {
       setErrorMsg("❌ Netzwerkfehler");
     }
   };
@@ -74,21 +74,15 @@ export default function PraxisApp() {
 
     const { error } = await supabase.auth.signUp({ email, password });
 
-    if (error) {
-      setErrorMsg(error.message);
-    } else {
-      await handleLogin();
-    }
+    if (error) setErrorMsg(error.message);
+    else await handleLogin();
   };
 
   const speichern = async () => {
     if (!eintrag.datum || !eintrag.betrag) return;
 
     const { error } = await supabase.from("buchungen").insert([
-      {
-        ...eintrag,
-        user_id: session.user.id
-      }
+      { ...eintrag, user_id: session.user.id }
     ]);
 
     if (error) {
@@ -101,7 +95,12 @@ export default function PraxisApp() {
     setEintrag({
       datum: "",
       betrag: "",
-      typ: "Einnahme"
+      typ: "Einnahme",
+      kategorie: "",
+      zahlungsart: "",
+      leistung: "",
+      debitor: "",
+      kreditor: ""
     });
   };
 
@@ -111,102 +110,57 @@ export default function PraxisApp() {
       : sum - parseFloat(d.betrag || 0);
   }, 0);
 
-  // ✅ LOGIN VIEW
   if (!session) {
     return (
       <div style={containerStyle}>
-        <img src="/logo.png" alt="Logo" style={logoLarge} />
+        /logo.png
 
-        <h2>
-          {mode === "login" ? "Einloggen" : "Konto erstellen"}
-        </h2>
+        <h2>{mode === "login" ? "Einloggen" : "Konto erstellen"}</h2>
 
-        <input
-          placeholder="E-Mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={inputStyle}
-        />
-
-        <input
-          type="password"
-          placeholder="Passwort"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={inputStyle}
-        />
+        <input placeholder="E-Mail" value={email} onChange={(e) => setEmail(e.target.value)} style={inputStyle} />
+        <input type="password" placeholder="Passwort" value={password} onChange={(e) => setPassword(e.target.value)} style={inputStyle} />
 
         {errorMsg && <div style={errorStyle}>{errorMsg}</div>}
 
         {mode === "login" ? (
-          <button style={buttonStyle} onClick={handleLogin}>
-            🔐 Einloggen
-          </button>
+          <button style={buttonStyle} onClick={handleLogin}>🔐 Einloggen</button>
         ) : (
-          <button
-            style={{ ...buttonStyle, background: "green" }}
-            onClick={handleSignup}
-          >
-            🆕 Konto erstellen
-          </button>
+          <button style={{ ...buttonStyle, background: "green" }} onClick={handleSignup}>🆕 Konto erstellen</button>
         )}
 
-        <button
-          style={{ ...buttonStyle, background: "gray" }}
-          onClick={() =>
-            setMode(mode === "login" ? "signup" : "login")
-          }
-        >
+        <button style={{ ...buttonStyle, background: "gray" }} onClick={() => setMode(mode === "login" ? "signup" : "login")}>
           {mode === "login" ? "Registrieren" : "Zum Login"}
         </button>
       </div>
     );
   }
 
-  // ✅ APP VIEW
   return (
     <div style={containerStyle}>
-      <img src="/logo.png" alt="Logo" style={logoSmall} />
+      <img src="/logo.png" style={logoSmall} alt="Logo" />
 
-      <h1>Praxis Cloud Buchhaltung</h1>
+      <h1>Praxis Einnahmen-Ausgaben</h1>
 
-      <button style={buttonStyle} onClick={() => supabase.auth.signOut()}>
-        Logout
-      </button>
+      <button style={buttonStyle} onClick={() => supabase.auth.signOut()}>Logout</button>
 
       <div style={boxStyle}>
-        <input
-          type="date"
-          value={eintrag.datum}
-          onChange={(e) =>
-            setEintrag({ ...eintrag, datum: e.target.value })
-          }
-          style={inputStyle}
-        />
+        <h3>Neue Buchung</h3>
 
-        <input
-          placeholder="Betrag CHF"
-          value={eintrag.betrag}
-          onChange={(e) =>
-            setEintrag({ ...eintrag, betrag: e.target.value })
-          }
-          style={inputStyle}
-        />
+        <input type="date" value={eintrag.datum} onChange={e => setEintrag({ ...eintrag, datum: e.target.value })} style={inputStyleModern} />
+        <input placeholder="Betrag CHF" value={eintrag.betrag} onChange={e => setEintrag({ ...eintrag, betrag: e.target.value })} style={inputStyleModern} />
 
-        <select
-          value={eintrag.typ}
-          onChange={(e) =>
-            setEintrag({ ...eintrag, typ: e.target.value })
-          }
-          style={inputStyle}
-        >
+        <select value={eintrag.typ} onChange={e => setEintrag({ ...eintrag, typ: e.target.value })} style={inputStyleModern}>
           <option>Einnahme</option>
           <option>Ausgabe</option>
         </select>
 
-        <button style={buttonStyle} onClick={speichern}>
-          Speichern
-        </button>
+        <input placeholder="Kategorie" value={eintrag.kategorie} onChange={e => setEintrag({ ...eintrag, kategorie: e.target.value })} style={inputStyleModern} />
+        <input placeholder="Zahlungsart" value={eintrag.zahlungsart} onChange={e => setEintrag({ ...eintrag, zahlungsart: e.target.value })} style={inputStyleModern} />
+        <input placeholder="Leistung" value={eintrag.leistung} onChange={e => setEintrag({ ...eintrag, leistung: e.target.value })} style={inputStyleModern} />
+        <input placeholder="Debitor" value={eintrag.debitor} onChange={e => setEintrag({ ...eintrag, debitor: e.target.value })} style={inputStyleModern} />
+        <input placeholder="Kreditor" value={eintrag.kreditor} onChange={e => setEintrag({ ...eintrag, kreditor: e.target.value })} style={inputStyleModern} />
+
+        <button style={buttonStyle} onClick={speichern}>✅ Speichern</button>
       </div>
 
       <div style={boxStyle}>
@@ -228,10 +182,8 @@ export default function PraxisApp() {
   );
 }
 
-// ✅ Styles
-
 const containerStyle = {
-  maxWidth: 400,
+  maxWidth: 420,
   margin: "auto",
   padding: 20,
   textAlign: "center"
@@ -255,13 +207,22 @@ const inputStyle = {
   marginBottom: 10
 };
 
+const inputStyleModern = {
+  width: "100%",
+  padding: 12,
+  marginBottom: 10,
+  borderRadius: 8,
+  border: "1px solid #ddd"
+};
+
 const buttonStyle = {
   width: "100%",
   padding: 12,
   marginTop: 8,
   background: "blue",
   color: "white",
-  border: "none"
+  border: "none",
+  borderRadius: 8
 };
 
 const errorStyle = {
@@ -272,5 +233,6 @@ const errorStyle = {
 const boxStyle = {
   border: "1px solid #ccc",
   padding: 15,
-  marginTop: 20
+  marginTop: 20,
+  borderRadius: 10
 };
