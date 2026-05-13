@@ -258,9 +258,9 @@ const containerStyle = {
 };
 
 const logoLarge = {
-  width: "35%",
-  maxWidth: 110,
-  borderRadius: 12,
+  width: "55%",
+  maxWidth: 160,
+  marginBottom: 10
 };
 
 const logoSmall = {
