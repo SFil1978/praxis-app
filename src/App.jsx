@@ -112,8 +112,9 @@ export default function PraxisApp() {
 
   if (!session) {
     return (
-      <div style={containerStyle}>
-        <img src="logo.png" />
+		<div style={{ display: "flex", justifyContent: "center" }}>
+		  <img src="/logo.png" style={logoLarge} alt="Logo" />
+		</div>
 
         <h2>{mode === "login" ? "Einloggen" : "Konto erstellen"}</h2>
 
