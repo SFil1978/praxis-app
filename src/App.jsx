@@ -212,6 +212,10 @@ if (!session) {
       <div style={boxStyle}>
         <h3>Neue Buchung</h3>
 
+<div style={{ marginTop: 10 }}>
+  <strong>Grunddaten</strong>
+</div>
+
         <input type="date" value={eintrag.datum} onChange={e => setEintrag({ ...eintrag, datum: e.target.value })} style={inputStyleModern} />
         <input placeholder="Betrag CHF" value={eintrag.betrag} onChange={e => setEintrag({ ...eintrag, betrag: e.target.value })} style={inputStyleModern} />
 
