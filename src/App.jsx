@@ -113,7 +113,7 @@ export default function PraxisApp() {
   if (!session) {
     return (
       <div style={containerStyle}>
-        /logo.png
+        <img src="logo.png" />
 
         <h2>{mode === "login" ? "Einloggen" : "Konto erstellen"}</h2>
 
@@ -139,7 +139,7 @@ export default function PraxisApp() {
     <div style={containerStyle}>
       <img src="/logo.png" style={logoSmall} alt="Logo" />
 
-      <h1>Praxis Einnahmen-Ausgaben</h1>
+      <h1>Einnahmen-Ausgaben</h1>
 
       <button style={buttonStyle} onClick={() => supabase.auth.signOut()}>Logout</button>
 
