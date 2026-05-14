@@ -276,6 +276,8 @@ if (!session) {
 
         <button style={buttonStyle} onClick={speichern}>✅ Speichern</button>
       </div>
+      </div>
+
 
       <div style={boxStyle}>
         <h3>Saldo: {gesamt.toFixed(2)} CHF</h3>
