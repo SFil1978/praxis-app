@@ -329,18 +329,14 @@ const inputStyle = {
 
 const inputStyleModern = {
   width: "100%",
-  padding: 14,
-  marginBottom: 12,
+  maxWidth: "100%",
+  padding: "14px",
+  marginBottom: "12px",
   borderRadius: 10,
   border: "1px solid #ddd",
   fontSize: 16,
   boxSizing: "border-box"
-
-  backgroundColor: "#fff",
-
-  WebkitAppearance: "none",   // ✅ wichtig für iPhone
   display: "block"
-
 };
 
 const buttonStyle = {
@@ -366,8 +362,11 @@ const boxStyle = {
   padding: 15,
   marginTop: 20,
   borderRadius: 12,
-  background: "#fafafa"
+  background: "#fafafa",
+  width: "100%",              // ✅ wichtig
+  boxSizing: "border-box"     // ✅ entscheidend!
 };
+
 const dashboardStyle = {
   display: "flex",
   gap: 10,
