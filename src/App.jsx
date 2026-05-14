@@ -216,7 +216,16 @@ if (!session) {
   <strong>Grunddaten</strong>
 </div>
 
-        <input type="date" value={eintrag.datum} onChange={e => setEintrag({ ...eintrag, datum: e.target.value })} style={inputStyleModern} />
+        <input type="date" 
+	value={eintrag.datum} 
+	onChange={e => setEintrag({ ...eintrag, datum: e.target.value })} 
+	style={{
+		...inputStyleModern,
+		width: "100%",
+		minHeight: 45
+	}}
+ />
+
         <input placeholder="Betrag CHF" value={eintrag.betrag} onChange={e => setEintrag({ ...eintrag, betrag: e.target.value })} style={inputStyleModern} />
 
         <select value={eintrag.typ} onChange={e => setEintrag({ ...eintrag, typ: e.target.value })} style={inputStyleModern}>
@@ -327,6 +336,12 @@ const inputStyleModern = {
   border: "1px solid #ddd",
   fontSize: 16,
   boxSizing: "border-box"
+
+  backgroundColor: "#fff",
+
+  WebkitAppearance: "none",   // ✅ wichtig für iPhone
+  display: "block"
+
 };
 
 const buttonStyle = {
