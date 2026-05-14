@@ -209,7 +209,7 @@ if (!session) {
 
       <button style={buttonStyle} onClick={() => supabase.auth.signOut()}>Logout</button>
 
-      <div style={boxStyle}>
+      <div style={{ ...boxStyle, overflow: "hidden" }}>
         <h3>Neue Buchung</h3>
 
 <div style={{ marginTop: 10 }}>
@@ -301,9 +301,10 @@ const containerStyle = {
   maxWidth: "100%",
   width: "100%",
   margin: "auto",
-  padding: 15,
+  padding: "15px 10px",   // ✅ weniger seitliches Padding
   textAlign: "center",
-  boxSizing: "border-box"
+  boxSizing: "border-box",
+  overflowX: "hidden"     // ✅ verhindert Überlauf komplett
 };
 
 const logoLarge = {
