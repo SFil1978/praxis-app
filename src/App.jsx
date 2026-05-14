@@ -216,15 +216,14 @@ if (!session) {
   <strong>Grunddaten</strong>
 </div>
 
-        <input type="date" 
-	value={eintrag.datum} 
-	onChange={e => setEintrag({ ...eintrag, datum: e.target.value })} 
-	style={{
-		...inputStyleModern,
-		width: "100%",
-		minHeight: 45
-	}}
- />
+
+<input
+  type="text"
+  placeholder="Datum (YYYY-MM-DD)"
+  value={eintrag.datum}
+  onChange={e => setEintrag({ ...eintrag, datum: e.target.value })}
+  style={inputStyleModern}
+/>
 
         <input placeholder="Betrag CHF" value={eintrag.betrag} onChange={e => setEintrag({ ...eintrag, betrag: e.target.value })} style={inputStyleModern} />
 
