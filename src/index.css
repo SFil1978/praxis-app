@@ -54,6 +54,11 @@ body {
   margin: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+
 #root {
   width: 1126px;
   max-width: 100%;
