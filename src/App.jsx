@@ -121,7 +121,7 @@ const gewinn = einnahmen - ausgaben;
 
 if (!session) {
   return (
-    <div style={containerStyle}>
+    <div style={{ ...containerStyle, overflowX: "hidden" }}>
 
       {/* 🔥 LOGO MIT APP LOOK */}
       <div style={{
@@ -209,9 +209,9 @@ if (!session) {
 
       <button style={buttonStyle} onClick={() => supabase.auth.signOut()}>Logout</button>
 
-      <div style={{ ...boxStyle, overflow: "hidden" }}>
+      <div style={{ ...boxStyle, width: "100%", overflow: "hidden" }}>
         <h3>Neue Buchung</h3>
-
+<div style={{ maxWidth: "100%", overflow: "hidden" }}>
 <div style={{ marginTop: 10 }}>
   <strong>Grunddaten</strong>
 </div>
@@ -294,6 +294,7 @@ if (!session) {
           </tbody>
         </table>
       </div>
+</div>
   );
 }
 
@@ -329,18 +330,17 @@ const inputStyle = {
   boxSizing: "border-box"
 };
 
+
 const inputStyleModern = {
   width: "100%",
-  maxWidth: "100%",
-  padding: "14px",
-  marginBottom: "12px",
+  padding: 12,
+  marginBottom: 12,
   borderRadius: 10,
   border: "1px solid #ddd",
   fontSize: 16,
-  boxSizing: "border-box",
-  display: "block",
-  backgroundColor: "#fff"
+  boxSizing: "border-box"
 };
+
 
 const buttonStyle = {
   width: "100%",
