@@ -280,7 +280,9 @@ if (!session) {
       <div style={boxStyle}>
         <h3>Saldo: {gesamt.toFixed(2)} CHF</h3>
 
-        <table style={{ width: "100%" }}>
+
+<div style={{ overflowX: "auto" }}>
+  <table style={{ width: "100%", tableLayout: "fixed" }}>
           <tbody>
             {daten.map((d, i) => (
               <tr key={i}>
@@ -292,7 +294,6 @@ if (!session) {
           </tbody>
         </table>
       </div>
-    </div>
   );
 }
 
@@ -335,8 +336,9 @@ const inputStyleModern = {
   borderRadius: 10,
   border: "1px solid #ddd",
   fontSize: 16,
-  boxSizing: "border-box"
-  display: "block"
+  boxSizing: "border-box",
+  display: "block",
+  backgroundColor: "#fff"
 };
 
 const buttonStyle = {
