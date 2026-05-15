@@ -106,9 +106,25 @@ export default function PraxisApp() {
   return (
     <div style={containerStyle}>
 
-      <img src="/logo.png" style={logoSmall} alt="Logo" />
-      <h1>Einnahmen-Ausgaben</h1>
+<div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+  <img src="/logo.png" style={logoSmall} alt="Logo" />
 
+  <button
+    style={{
+      padding: "8px 12px",
+      background: "#ef4444",
+      color: "white",
+      border: "none",
+      borderRadius: 6,
+      fontSize: 14
+    }}
+    onClick={() => supabase.auth.signOut()}
+  >
+    Logout
+  </button>
+</div>
+
+<h1>Einnahmen-Ausgaben</h1>
       {/* Dashboard */}
       <div style={dashboardStyle}>
         <div style={cardStyle}>Einnahmen<br /><strong>{einnahmen.toFixed(2)} CHF</strong></div>
