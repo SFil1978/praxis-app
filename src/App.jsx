@@ -266,3 +266,8 @@ const logoLarge = {
 const logoSmall = {
   width: 80
 };
+
+const titleStyle = {
+  fontSize: "clamp(20px, 4vw, 28px)",
+  margin: "10px 0 20px"
+};
