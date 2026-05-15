@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
   "https://wgvzexpwhdyxtwasnvde.supabase.co",
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndndnpleHB3aGR5eHR3YXNudmRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NjU3NDUsImV4cCI6MjA5NDI0MTc0NX0.T0qme7QG1hwXijozmxZwMZ4H3ZDZtom7WR5Zfl_c2vg"
+  "DEIN_KEY"
 );
 
 export default function PraxisApp() {
@@ -121,3 +121,107 @@ export default function PraxisApp() {
         <h3>Neue Buchung</h3>
 
         <input style={inputStyleModern} placeholder="Datum (YYYY-MM-DD)" value={eintrag.datum} onChange={e => setEintrag({ ...eintrag, datum: e.target.value })} />
+        <input style={inputStyleModern} placeholder="Betrag CHF" value={eintrag.betrag} onChange={e => setEintrag({ ...eintrag, betrag: e.target.value })} />
+
+        <select style={inputStyleModern} value={eintrag.typ} onChange={e => setEintrag({ ...eintrag, typ: e.target.value })}>
+          <option>Einnahme</option>
+          <option>Ausgabe</option>
+        </select>
+
+        <select style={inputStyleModern} value={eintrag.kategorie} onChange={e => setEintrag({ ...eintrag, kategorie: e.target.value })}>
+          <option>Kategorie wählen</option>
+          <option>Administration</option>
+          <option>Miete</option>
+          <option>Material</option>
+          <option>Marketing</option>
+        </select>
+
+        <select style={inputStyleModern} value={eintrag.zahlungsart} onChange={e => setEintrag({ ...eintrag, zahlungsart: e.target.value })}>
+          <option>Zahlungsart wählen</option>
+          <option>Bar</option>
+          <option>Twint</option>
+          <option>Rechnung</option>
+        </select>
+
+        <button style={buttonStyle} onClick={speichern}>✅ Speichern</button>
+      </div>
+
+      {/* Tabelle */}
+      <div style={boxStyle}>
+        <h3>Alle Buchungen</h3>
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ width: "100%", tableLayout: "fixed" }}>
+            <tbody>
+              {daten.map((d, i) => (
+                <tr key={i}>
+                  <td style={{ wordBreak: "break-word" }}>{d.datum}</td>
+                  <td>{d.betrag}</td>
+                  <td>{d.typ}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+const containerStyle = {
+  maxWidth: 500,
+  margin: "auto",
+  padding: 15
+};
+
+const inputStyle = {
+  width: "100%",
+  padding: 12,
+  marginBottom: 10,
+  boxSizing: "border-box"
+};
+
+const inputStyleModern = {
+  width: "100%",
+  padding: 12,
+  marginBottom: 10,
+  borderRadius: 8,
+  border: "1px solid #ddd",
+  boxSizing: "border-box"
+};
+
+const buttonStyle = {
+  width: "100%",
+  padding: 12,
+  background: "#2563eb",
+  color: "white",
+  border: "none",
+  borderRadius: 8
+};
+
+const boxStyle = {
+  border: "1px solid #eee",
+  padding: 15,
+  marginTop: 20,
+  borderRadius: 10
+};
+
+const dashboardStyle = {
+  display: "flex",
+  gap: 10
+};
+
+const cardStyle = {
+  flex: 1,
+  padding: 10,
+  background: "#f1f5f9",
+  borderRadius: 8
+};
+
+const logoLarge = {
+  width: 120
+};
+
+const logoSmall = {
+  width: 80
+};
