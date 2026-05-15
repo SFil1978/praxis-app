@@ -124,7 +124,7 @@ export default function PraxisApp() {
   </button>
 </div>
 
-<h1>Einnahmen-Ausgaben</h1>
+<h1 style={titleStyle}>Einnahmen-Ausgaben</h1>
       {/* Dashboard */}
       <div style={dashboardStyle}>
         <div style={cardStyle}>Einnahmen<br /><strong>{einnahmen.toFixed(2)} CHF</strong></div>
