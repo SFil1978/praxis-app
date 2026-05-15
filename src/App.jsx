@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
   "https://wgvzexpwhdyxtwasnvde.supabase.co",
-  "DEIN_KEY"
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndndnpleHB3aGR5eHR3YXNudmRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2NjU3NDUsImV4cCI6MjA5NDI0MTc0NX0.T0qme7QG1hwXijozmxZwMZ4H3ZDZtom7WR5Zfl_c2vg"
 );
 
 export default function PraxisApp() {
@@ -142,6 +142,31 @@ export default function PraxisApp() {
           <option>Twint</option>
           <option>Rechnung</option>
         </select>
+
+<select
+  style={inputStyleModern}
+  value={eintrag.leistung}
+  onChange={e => setEintrag({ ...eintrag, leistung: e.target.value })}
+>
+  <option>Leistung wählen</option>
+  <option>Kennenlern-Sitzung</option>
+  <option>Hypnose</option>
+  <option>ChiroTrance Hypnose</option>
+</select>
+
+<input
+  style={inputStyleModern}
+  placeholder="Debitor"
+  value={eintrag.debitor}
+  onChange={e => setEintrag({ ...eintrag, debitor: e.target.value })}
+/>
+
+<input
+  style={inputStyleModern}
+  placeholder="Kreditor"
+  value={eintrag.kreditor}
+  onChange={e => setEintrag({ ...eintrag, kreditor: e.target.value })}
+/>
 
         <button style={buttonStyle} onClick={speichern}>✅ Speichern</button>
       </div>
