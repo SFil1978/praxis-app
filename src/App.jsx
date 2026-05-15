@@ -26,6 +26,7 @@ export default function PraxisApp() {
   });
 
   const [daten, setDaten] = useState([]);
+  const [monat, setMonat] = useState("");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
@@ -70,15 +71,20 @@ export default function PraxisApp() {
     });
   };
 
-  const einnahmen = daten
-    .filter(d => d.typ === "Einnahme")
-    .reduce((sum, d) => sum + parseFloat(d.betrag || 0), 0);
+const gefiltert = daten.filter(d => {
+  if (!monat) return true;
+  return d.datum.startsWith(monat);
+});
 
-  const ausgaben = daten
-    .filter(d => d.typ === "Ausgabe")
-    .reduce((sum, d) => sum + parseFloat(d.betrag || 0), 0);
+const einnahmen = gefiltert
+  .filter(d => d.typ === "Einnahme")
+  .reduce((sum, d) => sum + parseFloat(d.betrag || 0), 0);
 
-  const gewinn = einnahmen - ausgaben;
+const ausgaben = gefiltert
+  .filter(d => d.typ === "Ausgabe")
+  .reduce((sum, d) => sum + parseFloat(d.betrag || 0), 0);
+
+const gewinn = einnahmen - ausgaben;
 
   if (!session) {
     return (
@@ -125,6 +131,18 @@ export default function PraxisApp() {
 </div>
 
 <h1 style={titleStyle}>Einnahmen-Ausgaben</h1>
+
+<div style={{ marginTop: 10 }}>
+  <strong>Monat auswählen</strong>
+</div>
+
+<input
+  type="month"
+  value={monat}
+  onChange={e => setMonat(e.target.value)}
+  style={inputStyleModern}
+/>
+
       {/* Dashboard */}
       <div style={dashboardStyle}>
         <div style={cardStyle}>Einnahmen<br /><strong>{einnahmen.toFixed(2)} CHF</strong></div>
@@ -193,7 +211,7 @@ export default function PraxisApp() {
         <div style={{ overflowX: "auto" }}>
           <table style={{ width: "100%", tableLayout: "fixed" }}>
             <tbody>
-              {daten.map((d, i) => (
+		{gefiltert.map((d, i) => (	
                 <tr key={i}>
                   <td style={{ wordBreak: "break-word" }}>{d.datum}</td>
                   <td>{d.betrag}</td>
